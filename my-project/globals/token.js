@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
-const secret = require('../config/secret');
+const secret = "gdgfdgdgdfgdf" // to be changed !!!!!!!!
 const bcrypt = require('bcrypt');
 const crypto_key = '1a7c114351a4c2a2a9ef9e1187ac70f='
 const crypto_iv = '55abc13120890eb='
@@ -31,27 +31,11 @@ function _decrypt(token) {
 
 }
 
-function disableToken(token) {
-  const key = `tokenkey:${token}`;
-  return redisClient.set(key,1, redis.print);
-}
-
-isDisabledToken = async (token)=> {
-  const key = `tokenkey:${token}`;
-  return new Promise( resolve => {
-    redisClient.get(key, (err, res) => {
-      if(err) return resolve(false);
-      return resolve(res === '1');
-    });
-  });
-
-}
-
 // create a new token
 function createToken(user) {
   
   let scopes;
-  scopes = user.scope;
+  // scopes = user.scope;
   
   // Sign the JWT
   const token = jwt.sign(
@@ -60,8 +44,7 @@ function createToken(user) {
       username: user.username,
       email: user.email,
       deviceId: user.deviceId,
-      spaceId: user.space_id,
-      scope: [scopes]
+      // scope: [scopes]
     }, 
     secret, 
     { 
@@ -70,7 +53,8 @@ function createToken(user) {
     }
   );
 
-  return _encrypt(token);
+  // return _encrypt(token);
+  return token
 
 }
 
@@ -160,8 +144,6 @@ module.exports = {
   verifyToken: verifyToken,
 	hashPassword: hashPassword,
   _hashPassword: _hashPassword,
-  disableToken: disableToken,
-  isDisabledToken: isDisabledToken,
   _encrypt: _encrypt,
   _decrypt: _decrypt,
 };

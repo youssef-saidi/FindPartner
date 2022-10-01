@@ -1,7 +1,8 @@
 import Sequelize from 'sequelize';
-import config from './config/config.js';
+import config from './config/config.mjs';
 
 let sequelize;
+console.log(config)
 if (process.env.NODE_ENV === 'production') {
   sequelize = new Sequelize(config.production);
 } else if (process.env.NODE_ENV === 'staging') {

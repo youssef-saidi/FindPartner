@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import  logSliceReducer  from './logSlice'
+import  logSliceReducer  from './slices/logSlice'
 import { createWrapper } from 'next-redux-wrapper'
 
 const combinedReducer=combineReducers({

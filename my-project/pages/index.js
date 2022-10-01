@@ -1,11 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux'
-import { logIn, logOut } from '../app/logSlice'
+import { logIn, logOut } from '../app/slices/logSlice'
 
 
 export default function Home() {
   const isLog = useSelector((state) => state.isLoggin.logSliceReducer.value)
   const dispatch =useDispatch()
-  console.log(isLog)
+  // console.log(isLog)
   return (
     <section className='font-bold text-center w-screen'>
       ISLogged ?

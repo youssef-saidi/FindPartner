@@ -16,7 +16,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.5",
     "bcrypt": "^5.0.1",
-    "crypto": "^1.0.1",
+    "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "env-cmd": "^10.1.0",
     "jsonwebtoken": "^8.5.1",

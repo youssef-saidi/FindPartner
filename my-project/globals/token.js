@@ -1,110 +1,110 @@
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
-const secret = "gdgfdgdgdfgdf" // to be changed !!!!!!!!
+var CryptoJS = require("crypto-js");
 const bcrypt = require('bcrypt');
-const crypto_key = '1a7c114351a4c2a2a9ef9e1187ac70f='
-const crypto_iv = '55abc13120890eb='
+
 
 function _encrypt(token) {
-  const cipher = crypto.createCipheriv('aes-256-cbc', Buffer.from(crypto_key), crypto_iv);
-  const encrypted = Buffer.concat([cipher.update(token), cipher.final()]);
-  return encrypted.toString('hex');
+  if (!token) return false;
+
+  var ciphertext = CryptoJS.AES.encrypt(token, process.env.CRYPTO_KEY).toString();
+  return ciphertext;
 }
 
-function _decrypt(token) {
 
+
+function _decrypt(token) {
   try {
 
-    if(!token) return false;
+    if (!token) return false;
 
-    let encryptedText = Buffer.from(token, 'hex');
-    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(crypto_key), iv = Buffer.from(crypto_iv));
-    let decrypted = decipher.update(Buffer.from(token, 'hex'));
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    return decrypted.toString();
+    var bytes = CryptoJS.AES.decrypt(token, process.env.CRYPTO_KEY);
+    var originalText = bytes.toString(CryptoJS.enc.Utf8);
+    return originalText;
 
   } catch (e) {
-
     return false;
-
   }
-
 }
 
 // create a new token
 function createToken(user) {
-  
   let scopes;
   // scopes = user.scope;
-  
   // Sign the JWT
   const token = jwt.sign(
     {
-      id: user.id, 
+      id: user.id,
       username: user.username,
       email: user.email,
       deviceId: user.deviceId,
       // scope: [scopes]
-    }, 
-    secret, 
-    { 
-      algorithm: 'HS256', 
+    },
+    process.env.PRIVATE_KEY,
+    {
+      algorithm: 'HS256',
       expiresIn: '183d'//Half year.
     }
   );
 
-  // return _encrypt(token);
-  return token
+  return _encrypt(token);
 
 }
 
+
+function verifyToken(token) {
+  try {
+    token = _decrypt(token);
+    if (!token) return false;
+    return jwt.verify(token, process.env.PRIVATE_KEY)
+  } catch (e) {
+    return {
+      error: e
+    };
+  }
+}
+
+function decodeToken(token) {
+  token = _decrypt(token);
+  return jwt.decode(token, process.env.PRIVATE_KEY);
+
+}
+
+
+
+
 // create a shortlife token
 function createShortToken(user) {
-  
+
   let scopes;
   scopes = user.scope;
-  
+
   // Sign the JWT
-  const token = jwt.sign({ 
-    id: user.id, 
+  const token = jwt.sign({
+    id: user.id,
     username: user.username,
     email: user.email,
-    scope: [scopes] }, 
-    secret, 
-    { algorithm: 'HS256', expiresIn: '4h' } );
+    scope: [scopes]
+  },
+  process.env.PRIVATE_KEY,
+    { algorithm: 'HS256', expiresIn: '4h' });
 
   return _encrypt(token);
 
 }
 
 function makeToken(data) {
-  
+
   const token = jwt.sign(
-    data, 
-    secret, 
+    data,
+    process.env.PRIVATE_KEY,
     { algorithm: 'HS256', expiresIn: '7200 days' } //20 years token.
   );
 
   return _encrypt(token);
 }
 
-function decodeToken(token) {
-  token = _decrypt(token);
-  return jwt.decode(token, secret);
 
-}
 
-function verifyToken(token){
-  try {
-    token = _decrypt(token);
-    if(!token) return false;
-    return jwt.verify(token, secret)
-  } catch(e) {
-    return {
-      error: e
-    };
-  }
-}
 
 // hash password
 function hashPassword(password, cb) {
@@ -122,11 +122,11 @@ function _hashPassword(password) {
 
 }
 
-_hashPassword = async (password)=> {
-  return new Promise( (resolve, reject) => {
+_hashPassword = async (password) => {
+  return new Promise((resolve, reject) => {
     bcrypt.genSalt(10, (err, salt) => {
       bcrypt.hash(password, salt, (err, hash) => {
-        if(err) return reject(err);
+        if (err) return reject(err);
         return resolve(hash);
       });
     });
@@ -139,10 +139,10 @@ _hashPassword = async (password)=> {
 module.exports = {
   createToken: createToken,
   createShortToken: createShortToken,
-	makeToken: makeToken,
+  makeToken: makeToken,
   decodeToken: decodeToken,
   verifyToken: verifyToken,
-	hashPassword: hashPassword,
+  hashPassword: hashPassword,
   _hashPassword: _hashPassword,
   _encrypt: _encrypt,
   _decrypt: _decrypt,

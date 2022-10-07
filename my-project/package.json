@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "env-cmd sequelize-cli db:migrate && next dev",
-    "build": "next build",
+    "build": "env-cmd sequelize-cli db:migrate && next build",
     "start": "next start",
     "lint": "next lint",
     "model:generate": "env-cmd sequelize-cli model:generate",

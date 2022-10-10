@@ -52,3 +52,15 @@ body {
   border: 1px solid #D9E2EE;
   border-radius: 5px;
 }
+
+.btnLogin {
+  background: #2C79E0;
+  box-shadow: 0px 10.4502px 23.2228px -6.96683px #2C79E0;
+  border-radius: 100px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 24px;
+  text-align: center;
+  text-transform: uppercase;
+}

@@ -18,7 +18,7 @@ module.exports = {
        },
       idConv: {
         type: Sequelize.INTEGER,
-        references: { model: 'conversation', key: 'id' }
+        references: { model: 'conversations', key: 'id' }
       },
       etat: Sequelize.BOOLEAN,
       createdAt: {

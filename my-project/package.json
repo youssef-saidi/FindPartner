@@ -14,7 +14,9 @@
     "migrate:rollback:all": "env-cmd sequelize-cli db:migrate:undo:all"
   },
   "dependencies": {
+    "@fingerprintjs/fingerprintjs-pro": "^3.7.1",
     "@reduxjs/toolkit": "^1.8.5",
+    "axios": "^1.1.2",
     "bcrypt": "^5.0.1",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",

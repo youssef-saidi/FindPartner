@@ -1,9 +1,9 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class conversation extends Model {
+
+import connection from '../connection';
+
+const {Model, DataTypes} = require('sequelize');
+const conversation = (sequelize, Types) => {
+  class Conversation extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,12 +11,33 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      this.belongsTo(models.users)
+
     }
   }
-  users.init({
+  Conversation.init({
+    id: {
+      allowNull: false,
+      type: Types.INTEGER,
+      autoIncrement: true,
+      primaryKey: true
+    },
+    senderId: {     
+      type: Types.INTEGER,
+      foreignKey: true,
+      references: { model: 'users', key: 'id' }
+    },
+    receiverId: {     
+      type: Types.INTEGER,
+      foreignKey: true,
+      references: { model: 'users', key: 'id' }
+    },
+
   }, {
     sequelize,
-    modelName: 'conversation',
+    modelName: "conversations",
   });
-  return conversation;
+  return Conversation;
 };
+
+export default conversation(connection,DataTypes)

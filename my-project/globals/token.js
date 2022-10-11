@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken');
 var CryptoJS = require("crypto-js");
-const bcrypt = require('bcrypt');
 
 
 function _encrypt(token) {
@@ -34,9 +33,9 @@ function createToken(user) {
   const token = jwt.sign(
     {
       id: user.id,
-      username: user.username,
+      fullname: user.fullname,
       email: user.email,
-      deviceId: user.deviceId,
+      // deviceId: user.deviceId,
       // scope: [scopes]
     },
     process.env.PRIVATE_KEY,
@@ -75,15 +74,16 @@ function decodeToken(token) {
 // create a shortlife token
 function createShortToken(user) {
 
-  let scopes;
-  scopes = user.scope;
+  // let scopes;
+  // scopes = user.scope;
 
   // Sign the JWT
   const token = jwt.sign({
     id: user.id,
-    username: user.username,
+    fullname: user.fullname,
     email: user.email,
-    scope: [scopes]
+    // deviceId: user.deviceId,
+    // scope: [scopes]
   },
   process.env.PRIVATE_KEY,
     { algorithm: 'HS256', expiresIn: '4h' });
@@ -106,34 +106,7 @@ function makeToken(data) {
 
 
 
-// hash password
-function hashPassword(password, cb) {
 
-  // Generate a salt at level 10 strength
-  bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
-      return cb(err, hash);
-    });
-  });
-
-}
-
-function _hashPassword(password) {
-
-}
-
-_hashPassword = async (password) => {
-  return new Promise((resolve, reject) => {
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(password, salt, (err, hash) => {
-        if (err) return reject(err);
-        return resolve(hash);
-      });
-    });
-
-  });
-
-}
 
 
 module.exports = {
@@ -142,8 +115,6 @@ module.exports = {
   makeToken: makeToken,
   decodeToken: decodeToken,
   verifyToken: verifyToken,
-  hashPassword: hashPassword,
-  _hashPassword: _hashPassword,
   _encrypt: _encrypt,
   _decrypt: _decrypt,
 };

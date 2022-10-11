@@ -1,9 +1,10 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-  class userMeta extends Model {
+
+import connection from '../connection';
+
+const {Model, DataTypes} = require('sequelize');
+const userMeta = (sequelize, Types) => {
+  class UserMeta extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -15,16 +16,18 @@ module.exports = (sequelize, DataTypes) => {
 
     }
   }
-  userMeta.init({
-    metaKey: DataTypes.STRING,
-    metValue: DataTypes.STRING,
+  UserMeta.init({
+    metaKey: Types.STRING,
+    metValue: Types.STRING,
     userId: {
-      type: DataTypes.INTEGER,
+      type: Types.INTEGER,
       references: { model: 'users', key: 'id' }
     },
   }, {
     sequelize,
-    modelName: 'userMeta',
+    modelName: 'UserMeta',
   });
-  return userMeta;
+  return UserMeta;
 };
+
+export default userMeta(connection,DataTypes)

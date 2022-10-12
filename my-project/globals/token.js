@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 var CryptoJS = require("crypto-js");
+const bcrypt = require('bcrypt');
 
 
 function _encrypt(token) {
@@ -105,7 +106,16 @@ function makeToken(data) {
 
 
 
+const hashPassword=(password, cb)=> {
 
+  // Generate a salt at level 10 strength
+  bcrypt.genSalt(10, (err, salt) => {
+    bcrypt.hash(password, salt, (err, hash) => {
+      return cb(err, hash);
+    });
+  });
+
+}
 
 
 
@@ -117,4 +127,6 @@ module.exports = {
   verifyToken: verifyToken,
   _encrypt: _encrypt,
   _decrypt: _decrypt,
+  hashPassword: hashPassword,
+
 };

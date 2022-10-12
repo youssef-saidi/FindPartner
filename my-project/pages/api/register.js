@@ -1,5 +1,5 @@
 import users from "../../db/models/users"
-import { createToken } from "../../globals/token";
+import { createToken ,hashPassword} from "../../globals/token";
 import _ from 'lodash';
 import { GLobals } from "../../globals/globalFunction";
 import usermeta from "../../db/models/usermeta";
@@ -32,7 +32,7 @@ export default async function register(req, res) {
 
     if (_.isEmpty(user)) {
 
-      GLobals.hashPassword(password, async (hashError, passHash) => {
+      hashPassword(password, async (hashError, passHash) => {
 
         if (hashError) {
           res.status(200).json({

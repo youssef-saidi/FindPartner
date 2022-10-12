@@ -1,5 +1,4 @@
-import FingerprintJS from '@fingerprintjs/fingerprintjs-pro'
-const bcrypt = require('bcrypt');
+// import FingerprintJS from '@fingerprintjs/fingerprintjs-pro'
 // import Cache from "./Storage.js";
 import Axios from 'axios';
 
@@ -10,21 +9,12 @@ const TokenKey='_find_partner_ugid'
 
 const validateEmail = (email) => email.match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
 
-const hashPassword=(password, cb)=> {
 
-    // Generate a salt at level 10 strength
-    bcrypt.genSalt(10, (err, salt) => {
-      bcrypt.hash(password, salt, (err, hash) => {
-        return cb(err, hash);
-      });
-    });
-  
-  }
 
 
 export const GLobals ={
     url:process.env.APP_URL,
-    university:["IssatSO,Eniso"],
+    university:["IssatSo","Eniso"],
     branch:["Prepa","Licence","Cycle ingenieur","master"],
     sexe:["Men","Women","Other.."],
     TokenKey: TokenKey,
@@ -40,7 +30,6 @@ export const GLobals ={
 	},
 
     validateEmail:validateEmail,
-    hashPassword: hashPassword,
 
 
     // deviceId:getFingerprint()

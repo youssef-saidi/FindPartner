@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import Bouton from '../components/bouton';
 import Input from '../components/input';
 import Select from '../components/Select';
+import { GLobals } from '../globals/globalFunction';
 
 const Register = () => {
 	// const { loggedin } = useSelector(state => state),
@@ -98,7 +99,7 @@ const Register = () => {
 	}
 	const university = {
 		label:"University",
-		values:["ISSATSo","ENISO"],
+		values:GLobals.university,
 		selectedValue:"ISSATSO"
 	}
 	const branch = {

@@ -5,7 +5,7 @@ import message from "../../../db/models/message"
 import { decodeToken, verifyToken } from '../../../globals/token';
 
 
-export default async function getConversation(req, res) {
+export default async function getConversationMessages(req, res) {
     const { token } = req.headers
     const { receiverId } = req.body
 

@@ -24,6 +24,9 @@ const hashPassword=(password, cb)=> {
 
 export const GLobals ={
     url:process.env.APP_URL,
+    university:["IssatSO,Eniso"],
+    branch:["Prepa","Licence","Cycle ingenieur","master"],
+    sexe:["Men","Women","Other.."],
     TokenKey: TokenKey,
     // Token: Cache.get(TokenKey),
 	Axios: () => {

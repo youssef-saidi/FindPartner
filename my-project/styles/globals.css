@@ -1,15 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Cookie&display=swap');
 
 :root {
-  --bgLinearBlue: linear-gradient(298.14deg, #2B78E0 18.09%, rgba(43, 120, 224, 0.79) 81.24%);
-  --colorPrimary: #5D6E81;
-  --colorBgPrimary: #F5F7F8;
-  --colorBgLogin: #EDF2F8;
-  --colorBlue: #2C79E0;
-  --navigationWidth: 240px;
-  --navigationWidthCollapsed: 80px;
+  --colorWhite: #ffffff;
+  --colorPink: #DB2777;
+  /* --navigationWidth: 240px;
+  --navigationWidthCollapsed: 80px; */
 }
 
 html,
@@ -20,47 +18,54 @@ body {
   scroll-behavior: smooth;
 }
 
-.bgLinearBlue {
-  background: var(--bgLinearBlue);
+.bgPink {
+  background-color: var(--colorPink);
 }
 
-.bgLogin {
-  background-color: var(--colorBgLogin);
-  box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
-  border-radius: 40px 40px 0px 0px;
+.colorPink{
+  color: var(--colorPink);
 }
-
-@media (min-width: 768px) {
-  .bgLogin {
-    background-color: var(--colorBgLogin);
-    box-shadow: 0px 4px 100px rgba(0, 0, 0, 0.25);
-    border-radius: 0px 0px 100px 0px;
-  }
-}
-
 
 .outlin input:focus-within~label,
 .outlin input:not(:placeholder-shown)~label {
   @apply transform scale-75 -translate-y-4 z-0 mb-3 mt-3 px-1 py-0;
 }
 
-.inputLogin {
+.rounded-br-5xl{
+  border-radius: 0px 70px 0px 0px;
+}
+
+@media screen and (min-width: 768px) {
+  .rounded-br-5xl{
+  border-radius: 0px 0px 120px 0px;
+}
+}
+
+.font-cookie{
+  font-family: 'Cookie', cursive;
+}
+/* @media (min-width: 768px) {
+  .bgLogin {
+    background-color: var(--colorBgLogin);
+    border-radius: 0px 0px 100px 0px;
+  }
+} */
+
+/* .inputLogin {
   font-size: .9rem;
   font-weight: normal;
-  color: rgb(0 0 0 / .4);
   background: #fff;
   border: 1px solid #D9E2EE;
   border-radius: 5px;
 }
 
 .btnLogin {
-  background: #2C79E0;
-  box-shadow: 0px 10.4502px 23.2228px -6.96683px #2C79E0;
-  border-radius: 100px;
+  background: #DB2777;
+  box-shadow: 0px 10.4502px 23.2228px -6.96683px #DB2777;
   font-style: normal;
   font-weight: 500;
   font-size: 16px;
   line-height: 24px;
   text-align: center;
   text-transform: uppercase;
-}
+} */

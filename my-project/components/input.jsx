@@ -4,7 +4,6 @@ import _ from 'lodash';
 
 const Input = ({ inputInfo ,handleChange ,formErrors }) => {
     const displayError = (key) => {
-        console.log(formErrors)
         if (!_.isEmpty(formErrors[key])) return <div className="pt-1 text-red-500 font-semibold">{formErrors[key]}</div>
       }
    

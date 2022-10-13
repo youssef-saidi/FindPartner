@@ -2,7 +2,7 @@ import React from 'react';
 
 const Navbar = () => {
     return (
-        <div className='fixed w-screen h-16 bgPink flex flex-row items-center place-content-between'>
+        <div className='sticky top-0 w-screen h-16 bgPink flex flex-row items-center place-content-between'>
             <div className='flex flex-row justify-center items-center p-4'>
                 <img className='w-7 h-7 cursor-pointer' src="/image/navIcon.png" alt="" srcset="" />
                 <h1 className='text-white font-cookie font-semibold text-xl px-4'>App Name</h1>

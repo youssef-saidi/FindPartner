@@ -31,7 +31,7 @@ export default async function register(req, res) {
     });
 
     if (_.isEmpty(user)) {
-
+      
       hashPassword(password, async (hashError, passHash) => {
 
         if (hashError) {

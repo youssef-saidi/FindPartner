@@ -1,13 +1,18 @@
 module.exports = {
+  
   set(id, data, stringify) {
     if (stringify) {
       data = JSON.stringify(data);
     }
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(id, data);
+    }
 
-    localStorage.setItem(id, data);
   },
 
   get(id, destringify) {
+    if (typeof window !== 'undefined') {
+  
     if (localStorage.getItem(id) !== "undefined") {
       let data = localStorage.getItem(id);
 
@@ -17,12 +22,15 @@ module.exports = {
 
       return data;
     }
+  }
 
     return false;
   },
 
   deleteStorage(id) {
-    localStorage.removeItem(id);
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem(id);
+    }
   },
 
   setCookie(cookie_name, cookie_value, exdays = 360) {

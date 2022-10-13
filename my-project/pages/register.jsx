@@ -98,48 +98,53 @@ const Register = () => {
 		erreur: "date"
 	}
 	const university = {
-		label:"University",
-		values:GLobals.university,
-		selectedValue:"ISSATSO"
+		label: "University",
+		values: GLobals.university,
+		selectedValue: "ISSATSO"
 	}
 	const branch = {
-		label:"Branch",
-		values:["Prepa","License"],
-		selectedValue:"Prepa"
+		label: "Branch",
+		values: GLobals.branch,
+		selectedValue: "Prepa"
+	}
+	const sexe = {
+		label: "Sexe",
+		values: GLobals.sexe,
+		selectedValue: "Female"
 	}
 	return (
-		<section className='h-screen flex flex-col-reverse md:flex-row bgPink relative'>
-			<div className='h-3/5 md:w-2/3 md:h-screen rounded-br-5xl bg-white flex flex-col items-center justify-center'>
-				<div className='flex flex-row'>
+		<section className='h-full xl:h-screen flex flex-col-reverse xl:flex-row bgPink relative'>
+			<div className='xl:w-2/3 h-full xl:h-screen rounded-br-4xl bg-white flex flex-col items-center justify-center'>
+				<div className='flex flex-col xl:flex-row mt-8'>
 					<div className='px-6'>
 						<Input inputInfo={fullName} />
 					</div>
-					<div className='px-6'>
+					<div className='px-6 mt-4 xl:mt-0'>
 						<Input inputInfo={fakeName} />
 					</div>
 				</div>
-				<div className='flex flex-row mt-4'>
+				<div className='flex flex-col xl:flex-row mt-4'>
 					<div className='px-6'>
 						<Input inputInfo={email} />
 					</div>
-					<div className='px-6'>
+					<div className='px-6 mt-4 xl:mt-0'>
 						<Input inputInfo={DateOfBirth} />
 					</div>
 				</div>
-				<div className='flex flex-row mt-4'>
+				<div className='flex flex-col xl:flex-row mt-4'>
 					<div className='px-6'>
 						<Select info={university} />
 					</div>
-					<div className='px-6'>
+					<div className='px-6 mt-4 xl:mt-0'>
 						<Select info={branch} />
 					</div>
 				</div>
-				<div className='flex flex-row mt-4'>
+				<div className='flex flex-col xl:flex-row mt-4'>
 					<div className='px-6'>
-						<Select info={university} />
+						<Select info={sexe} />
 					</div>
-					<div className='px-6'>
-						<Select info={branch} />
+					<div className='px-6 mt-4 xl:mt-0'>
+						<Select info={sexe} />
 					</div>
 				</div>
 				<div className='mt-3'>
@@ -147,11 +152,13 @@ const Register = () => {
 				</div>
 				<div className='flex flex-row font-semibold p-2 font-cookie'>
 					<p className='mr-1'>You have an account please</p>
-					<p className='colorPink'>Log In</p>
+					<Link href="/login">
+						<button className='colorPink underline underline-offset-4'>Log In</button>
+					</Link>
 				</div>
 			</div>
-			<div className='h-2/5 md:w-1/3 md:h-screen bgPink text-white p-10 flex flex-col justify-center items-center'>
-				<h1 className='fos²snt-cookie font-semibold text-3xl pb-16'>App Name</h1>
+			<div className='xl:w-1/3 h-full xl:h-screen bgPink text-white p-10 flex flex-col justify-center items-center'>
+				<h1 className='font-cookie font-semibold text-3xl pb-16'>App Name</h1>
 				<p className='font-semibold text-center'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo perferendis rem repudiandae veniam, assumenda ab nulla asperiores.</p>
 			</div>
 			<h2 className='absolute top-2 right-4 text-white font-cookie'>Beta Version</h2>

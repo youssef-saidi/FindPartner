@@ -71,12 +71,14 @@ const Login = () => {
         <div className="mt-14" >
           <Input inputInfo={password} />
         </div>
-        <div className='mt-3'>
+        <a href="/welcomePage" className='mt-3'>
           <Bouton value="Login" />
-        </div>
+        </a>
         <div className='flex flex-row font-semibold p-2 font-cookie'>
           <p className='mr-1'>You Dont’t have an account please</p>
-          <p className='colorPink'>Sign In</p>
+          <Link href="/register">
+            <button className='colorPink underline underline-offset-4'>Sign In</button>
+          </Link>
         </div>
       </div>
       <div className='h-2/5 md:w-1/3 md:h-screen bgPink text-white p-10 flex flex-col justify-center items-center'>

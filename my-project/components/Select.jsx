@@ -15,7 +15,7 @@ const Select = ({info}) => {
                 <h2 className='border-2 border-black rounded block p-4 md:w-96 w-80 text-base appearance-none outline-none bg-transparent text-black text-sm pt-5 font-medium'>{value}</h2>
                 <img onClick={() => { setapparence(!apparence) }} className='absolute top-4 right-3 w-6 h-6 cursor-pointer' src="image/fleche.png" alt="" srcset="" />
                 {apparence &&
-                    <div className='absolute top-15 rounded-sm md:w-96 w-80 flex flex-col text-black text-sm font-medium border-2 border-black mt-0.5 bg-white'>
+                    <div className='z-40 absolute top-15 rounded-sm md:w-96 w-80 flex flex-col text-black text-sm font-medium border-2 border-black mt-0.5 bg-white'>
                        {items}
                     </div>}
             </div>

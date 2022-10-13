@@ -41,9 +41,20 @@ body {
 }
 }
 
+.rounded-br-4xl{
+  border-radius: 0px 70px 0px 0px;
+}
+
+@media screen and (min-width: 1280px) {
+  .rounded-br-4xl{
+    border-radius: 0px 0px 120px 0px;
+  }
+}
+
 .font-cookie{
   font-family: 'Cookie', cursive;
 }
+
 /* @media (min-width: 768px) {
   .bgLogin {
     background-color: var(--colorBgLogin);
@@ -68,4 +79,4 @@ body {
   line-height: 24px;
   text-align: center;
   text-transform: uppercase;
-} */
+}*/

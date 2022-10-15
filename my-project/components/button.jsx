@@ -1,8 +1,8 @@
 import React from 'react';
 
-const Button = ({value ,type}) => {
+const Button = ({value ,type,bgColor}) => {
     return (
-        <input className='bg-white font-cookie py-4 rounded font-medium cursor-pointer w-64' type={type?"submit":"button"} value={value} />
+        <input style={{backgroundColor:bgColor,color:(bgColor=="#DB2777")&&"#FFFFFF"}} className='font-cookie py-4 rounded font-medium cursor-pointer w-64' type={type?"submit":"button"} value={value} />
     );
 }
 

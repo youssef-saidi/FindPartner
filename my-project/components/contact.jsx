@@ -1,10 +1,9 @@
 import React from 'react';
 
-const Contact = () => {
-    
+const Contact = () => {   
     return (
-        <div className='h-full pt-2'>
-            <div className='relative px-2 pb-2'>
+        <div className='h-full pt-2 bg-white rounded-tl-4xl pt-6'>
+            <div className='relative px-2 pb-3'>
                 <input placeholder='Search...' className='border border-slate-500 rounded w-full h-10 pl-2 pr-9' type="text" />
                 <img className='absolute top-2 right-4 w-6 h-6' src="/image/searchIcon.png" alt="" srcset="" />
             </div>
@@ -16,7 +15,7 @@ const Contact = () => {
                     </div>
                     <div className='flex flex-col'>
                         <h2 className='text-md font-semibold'>Ayechi Nour</h2>
-                        <p className='text-sm font-medium w-full truncate w-52'>vous: nhebek barcha hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
+                        <p className='text-sm font-medium w-full truncate w-40'>vous: nhebek barcha hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
                     </div>
                 </div>
                 <div className='flex flex-row py-2 items-center px-2 hover:bg-gray-100 cursor-pointer'>

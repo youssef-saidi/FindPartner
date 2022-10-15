@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
-import Bouton from '../components/bouton';
+import { useState } from 'react';
+import Button from '../components/button';
 import Input from '../components/input';
 import { GLobals } from '../globals/globalFunction';
 
@@ -60,12 +60,12 @@ const Login = () => {
   const email = {
     label: "Email",
     type: "email",
-    erreur: "email"
+    name: "email"
   }
   const password = {
     label: "Password",
     type: "password",
-    erreur: "password"
+    name: "password"
   }
   return (
     <section className='h-screen flex flex-col-reverse md:flex-row bgPink relative'>
@@ -74,9 +74,9 @@ const Login = () => {
         <div className="mt-14" >
           <Input handleChange={handleChange} formErrors={formErrors} inputInfo={password} />
         </div>
-        <a href="/welcomePage" className='mt-3'>
-          <Bouton value="Login" type="submit" />
-        </a>
+        <div className='mt-3'>
+          <Button value="Login" type="submit" bgColor="#DB2777" />
+        </div>
         <div className='flex flex-row font-semibold p-2 font-cookie'>
           <p className='mr-1'>You Dont’t have an account please</p>
           <Link href="/register">

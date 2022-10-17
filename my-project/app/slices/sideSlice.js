@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
-    apparence: true,
+    apparence: false,
 }
 
 export const sideSlice = createSlice({

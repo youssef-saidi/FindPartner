@@ -1,9 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import Contact from '../components/contact';
-import Conversation from '../components/conversation';
 import Navbar from '../components/navbar';
 import SideBar from '../components/sideBar';
+import Contact from './contact';
+import Conversation from './Conversation';
 
 const Chat = () => {
     const apparence = useSelector((state) => state.sideBar.apparence)

@@ -5,14 +5,13 @@ import _ from 'lodash';
 const Input = ({ inputInfo ,handleChange ,formErrors }) => {
     const displayError = (key) => {
         if (!_.isEmpty(formErrors[key])) return <div className="pt-1 text-red-500 font-semibold">{formErrors[key]}</div>
-      }
-   
+    }
     return (
         <div className="outlin">
             <label htmlFor={inputInfo.name} className="font-cookie text-lg font-semibold">{inputInfo.label}</label>
             <div className="outlin relative w-full mt-3">
                 <input
-                    onChange={handleChange}
+                    onBlur={handleChange}
                     type={inputInfo.type}
                     name={inputInfo.name}
                     placeholder=" "

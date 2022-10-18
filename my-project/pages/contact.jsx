@@ -1,7 +1,11 @@
 import React from 'react';
 
 const Contact = () => {
-    if (screen!=undefined)
+    
+    if (typeof window !== 'undefined'){
+        // Connaitre width de l'ecran
+        console.log(window.innerWidth ) 
+    }
     return (
         <div className='h-full pt-2 bg-white rounded-tl-4xl pt-6'>
             <div className='relative px-2 pb-3'>

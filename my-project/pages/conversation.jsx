@@ -2,7 +2,7 @@ import React from 'react';
 
 const Conversation = () => {
     return (
-        <div className='bg-slate-100 h-full p-4 relative'>
+        <div className='bg-slate-100 h-full p-4 relative z-10'>
             <div className='flex flex-row items-center rounded-lg sticky top-0 border-b py-3 bg-white'>
                 <a href="/contact">
                     <img className='w-5 h-5 ml-3 md:hidden' src="/image/flecheRetour.png" alt="" srcset="" />

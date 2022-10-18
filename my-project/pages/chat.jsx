@@ -2,7 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import Navbar from '../components/navbar';
 import SideBar from '../components/sideBar';
-import Contact from './contact';
+import Contacts from './contacts';
 import Conversation from './Conversation';
 
 const Chat = () => {
@@ -14,7 +14,7 @@ const Chat = () => {
                 {apparence&&<SideBar />}
                 <div className='flex flex-row divide-x-2 relative h-full'>
                     <div className='w-1/4'>
-                        <Contact />
+                        <Contacts />
                     </div>
                     <div className='w-3/4'>
                         <Conversation />

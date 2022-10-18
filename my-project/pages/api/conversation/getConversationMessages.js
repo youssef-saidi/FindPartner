@@ -6,44 +6,47 @@ import { decodeToken, verifyToken } from '../../../globals/token';
 
 
 export default async function getConversationMessages(req, res) {
-    const { token } = req.headers
-    const { receiverId } = req.body
+    if (req.method === 'POST') {
 
-    if(!_.isEmpty(verifyToken(token))){
-        const newtoken=decodeToken(token)
+        const { token } = req.headers
+        const { receiverId } = req.body
 
-        const convr = await conversation.findOne({where:{senderId:newtoken.id,receiverId:receiverId}})
+        if (!_.isEmpty(verifyToken(token))) {
+            const newtoken = decodeToken(token)
 
-        if (_.isEmpty(convr)) {
+            const convr = await conversation.findOne({ where: { senderId: newtoken.id, receiverId: receiverId } })
+
+            if (_.isEmpty(convr)) {
+                res.status(200).json(({
+                    status: false,
+                    errors: "Something went wrong please try again later."
+                }))
+            }
+            const Messages = await message.findAll({ where: { idConv: convr.dataValues.id } })
+
+            if (_.isEmpty(Messages)) {
+                res.status(200).json(({
+                    status: false,
+                    errors: "Something went wrong please try again later."
+                }))
+            }
+
+
             res.status(200).json(({
-                status: false,
-                errors: "Something went wrong please try again later."
+                status: true,
+                messages: Messages
+            }))
+
+        } else {
+
+            res.status(403).json(({
+                status: true,
+                errors: "Invalid token"
             }))
         }
-        const Messages = await message.findAll({where:{idConv:convr.dataValues.id}})
-
-        if (_.isEmpty(Messages)) {
-            res.status(200).json(({
-                status: false,
-                errors: "Something went wrong please try again later."
-            }))
-        }
-
-    
-        res.status(200).json(({
-            status: true,
-            messages: Messages
-        }))
-    
-    }else{
-
-    res.status(200).json(({
-        status: true,
-        errors: "Invalid token"
-    }))
-}
 
 
+    }
 
 
 }

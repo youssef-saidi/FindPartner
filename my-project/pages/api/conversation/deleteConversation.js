@@ -1,21 +1,20 @@
 import _ from 'lodash';
 import conversation from "../../../db/models/conversation"
+import message from "../../../db/models/message"
+
 import { decodeToken, verifyToken } from '../../../globals/token';
 
-export default async function setConversation(req, res) {
-    if (req.method === 'POST') {
 
+export default async function deleteConverssation(req, res) {
+    if (req.method === 'DELETE') {
 
         const { token } = req.headers
-        // U2FsdGVkX18K3jDTQSN3dUzXKADZAI2Hagen46a4IHY9VIkR3iZKi1YI4L7KvtiiC0/Rm7LiX93KBIijDko5BuKt5ea3WHgik8KdkCCvAwiZxI6+N7v2Q30qZ9bMlt65uIBrBnNWCM8RjWah3cs2/MVy+GlmNb1mifkbnkRV0PMzqiKE4cLjrX50rWb+HnW+GebjJtHjbmnFLATsv3wWD6aBRpW9H5CaBHfnOaZnUN13PVdaLm99zU3DvpnslJKZIggf1LUbQuMviet4rE1oxMR7FMDF3WoI4MuUrU+PPCLjkLsBv8H/RdUCq/VTUfP3    
-
         const { receiverId } = req.body
 
         if (!_.isEmpty(verifyToken(token))) {
-
             const newtoken = decodeToken(token)
 
-            const convr = await conversation.create({ senderId: newtoken.id, receiverId: receiverId })
+            const convr = await conversation.findOne({ where: { senderId: newtoken.id, receiverId: receiverId } })
 
             if (_.isEmpty(convr)) {
                 res.status(200).json(({
@@ -23,10 +22,19 @@ export default async function setConversation(req, res) {
                     errors: "Something went wrong please try again later."
                 }))
             }
+            const Messages = await message.update({etat:false},{ where: { idConv: convr.dataValues.id } })
+
+            if (_.isEmpty(Messages)) {
+                res.status(200).json(({
+                    status: false,
+                    errors: "Something went wrong please try again later."
+                }))
+            }
+
 
             res.status(200).json(({
                 status: true,
-                errors: "Conversation created"
+                messages: "Conversation Deleted"
             }))
 
         } else {
@@ -36,5 +44,8 @@ export default async function setConversation(req, res) {
                 errors: "Invalid token"
             }))
         }
+
+
     }
+
 }

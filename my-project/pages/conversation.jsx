@@ -3,12 +3,18 @@ import React from 'react';
 const Conversation = () => {
     return (
         <div className='bg-slate-100 h-full p-4 relative z-10'>
-            <div className='flex flex-row items-center rounded-lg sticky top-0 border-b py-3 bg-white'>
-                <a href="/contact">
-                    <img className='w-5 h-5 ml-3 md:hidden' src="/image/flecheRetour.png" alt="" srcset="" />
-                </a>
-                <img className='w-12 h-12 m-2 rounded-full' src="/image/nour.jpg" alt="" srcset="" />
-                <h1 className='text-lg font-semibold ml-2'>Ayechi Nour</h1>
+            <div className='flex flex-row items-center place-content-between rounded-lg sticky top-0 border-b py-3 bg-white'>
+                <div className='flex flex-row items-center'>
+                    <a href="/contact">
+                        <img className='w-5 h-5 ml-3 md:hidden' src="/image/flecheRetour.png" alt="" srcset="" />
+                    </a>
+                    <img className='w-12 h-12 m-2 rounded-full' src="/image/nour.jpg" alt="" srcset="" />
+                    <h1 className='text-lg font-semibold'>Ayechi Nour</h1>
+                </div>
+                <div className='flex flex-row items-center mr-8 py-2 px-5 bg-slate-200 rounded-3xl'>
+                    <h3 className='text-md font-semibold'>Settings</h3>
+                    <img className='w-5 h-5 ml-2' src="/image/settings.png" alt="" srcset="" />
+                </div>
             </div>
             <div className='overflow-y-scroll h-screen md:h-full bg-slate-100 md:mb-32 pt-2 md:pb-52'>
                 <div className='w-4/5 flex flex-row mt-2'>

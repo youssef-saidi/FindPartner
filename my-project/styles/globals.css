@@ -22,7 +22,7 @@ body {
   background-color: var(--colorPink);
 }
 
-.colorPink{
+.colorPink {
   color: var(--colorPink);
 }
 
@@ -31,32 +31,36 @@ body {
   @apply transform scale-75 -translate-y-4 z-0 mb-3 mt-3 px-1 py-0;
 }
 
-.rounded-br-5xl{
+.rounded-br-5xl {
   border-radius: 0px 70px 0px 0px;
 }
 
 @media screen and (min-width: 768px) {
-  .rounded-br-5xl{
-  border-radius: 0px 0px 120px 0px;
-}
-}
-
-.rounded-br-4xl{
-  border-radius: 0px 70px 0px 0px;
-}
-
-.rounded-tl-4xl{
-  border-radius: 20px 0px 0px 0px;
-}
-
-@media screen and (min-width: 1280px) {
-  .rounded-br-4xl{
+  .rounded-br-5xl {
     border-radius: 0px 0px 120px 0px;
   }
 }
 
-.font-cookie{
+.rounded-br-4xl {
+  border-radius: 0px 70px 0px 0px;
+}
+
+.rounded-tl-4xl {
+  border-radius: 18px 0px 0px 0px;
+}
+
+@media screen and (min-width: 1280px) {
+  .rounded-br-4xl {
+    border-radius: 0px 0px 120px 0px;
+  }
+}
+
+.font-cookie {
   font-family: 'Cookie', cursive;
+}
+
+input:focus {
+  outline:  none;
 }
 
 /* @media (min-width: 768px) {

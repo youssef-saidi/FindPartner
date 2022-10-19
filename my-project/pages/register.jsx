@@ -34,16 +34,16 @@ const Register = () => {
 			if (!_.isEmpty(errors)) return;
 			//Make sure all the data is being correct.
 			return Globals.Axios().post(`${Globals.wsurl}user/signup`, {
-				data: formData,
-				deviceId: Globals.deviceId,
-			}).then(response => {
-				if (response.data.status && response.data.token) {
-					Globals.Cache.set(Globals.TokenKey, response.data.token);
-					Globals.Cache.setCookie(Globals.TokenKey, response.data.token);
-					return window.location.reload();
-				}
-				errors = { ...errors, error: response.data.errors }
-				return updateFormErrors(errors);
+			// 	data: formData,
+			// 	deviceId: Globals.deviceId,
+			// }).then(response => {
+			// 	if (response.data.status && response.data.token) {
+			// 		Globals.Cache.set(Globals.TokenKey, response.data.token);
+			// 		Globals.Cache.setCookie(Globals.TokenKey, response.data.token);
+			// 		return window.location.reload();
+			// 	}
+				// errors = { ...errors, error: response.data.errors }
+				// return updateFormErrors(errors);
 			}).catch(error => {
 				errors = { ...errors, error: 'Something went wrong please try again later.' }
 				updateFormErrors(errors);

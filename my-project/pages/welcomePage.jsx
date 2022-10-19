@@ -6,7 +6,7 @@ const WelcomePage = () => {
     return (
         <div className='bgPink h-screen w-screen relative flex flex-col justify-center items-center'>
             <h2 className='absolute top-2 right-4 text-white font-cookie'>Beta Version</h2>
-            <img className='rounded-full border border-4 w-64 h-64' src="image/nour.jpg" alt="" srcset="" />
+            <img className='rounded-full border border-4 w-64 h-64' src="image/nour.jpg" alt="" srcSet="" />
             <h2 className='text-white font-cookie font-semibold p-4'>Fake Name</h2>
             <div className='mt-6 flex flex-col items-center justify-center'>
                 <a href="/getInTouch">

@@ -1,5 +1,6 @@
 import _ from 'lodash';
 import { useState } from "react";
+import AjoutImg from '../components/ajoutImg';
 import Button from '../components/button';
 import Input from '../components/input';
 import Select from '../components/Select';
@@ -23,12 +24,14 @@ const Register = () => {
 			_event.preventDefault();
 			let errors = {};
 			if (_.isEmpty(formData.name)) errors = { ...errors, name: 'Please fill in your name' };
-			if (_.isEmpty(formData.fakename)) errors = { ...errors, password: 'Invalid password' };
-			if (_.isEmpty(formData.sexe)) errors = { ...errors, company_address: 'Company address is reqiured' };
-			if (_.isEmpty(formData.date)) errors = { ...errors, state: 'Company state is reqiured' };
-			if (_.isEmpty(formData.university)) errors = { ...errors, zip_code: 'Company zip code is reqiured' };
-			if (_.isEmpty(formData.branch)) errors = { ...errors, country: 'Company country is reqiured' };
-			if (_.isEmpty(formData.email) || !Globals.validateEmail(formData.email)) errors = { ...errors, email: 'Company email is reqiured' };
+			if (_.isEmpty(formData.fakeName)) errors = { ...errors, fakeName: 'Please fill in your fake name' };
+			if (_.isEmpty(formData.email) || !Globals.validateEmail(formData.email)) errors = { ...errors, email: 'Your email is reqiured' };
+			if (_.isEmpty(formData.date)) errors = { ...errors, date: 'Your birthday date is required' };
+			if (_.isEmpty(formData.image)) errors = { ...errors, image: 'Your image is required' };
+
+			// if (_.isEmpty(formData.university)) errors = { ...errors, zip_code: 'Company zip code is reqiured' };
+			// if (_.isEmpty(formData.branch)) errors = { ...errors, country: 'Company country is reqiured' };
+			// if (_.isEmpty(formData.sexe)) errors = { ...errors, company_address: 'Company address is reqiured' };
 			
 			updateFormErrors(errors);
 			if (!_.isEmpty(errors)) return;
@@ -60,8 +63,8 @@ const Register = () => {
 	}
 	const fakeName = {
 		label: "Fake Name",
-		name: 'fakename',
-		type: "text"
+		type: "text",
+		name: 'fakeName'
 	}
 	const email = {
 		label: "Email",
@@ -87,6 +90,10 @@ const Register = () => {
 		label: "Sexe",
 		values: GLobals.sexe,
 		selectedValue: "Female"
+	}
+	const image = {
+		label: "Image",
+		name: "image"
 	}
 	return (
 		<section className='h-full xl:h-screen flex flex-col-reverse xl:flex-row bgPink relative'>
@@ -117,7 +124,7 @@ const Register = () => {
 				</div>
 				<div className='flex flex-col xl:flex-row mt-4'>
 					<div className='px-6'>
-						<Select info={sexe} />
+						<AjoutImg inputInfo={image} handleChange={handleChange} formErrors={formErrors} />
 					</div>
 					<div className='px-6 mt-4 xl:mt-0'>
 						<Select info={sexe} />

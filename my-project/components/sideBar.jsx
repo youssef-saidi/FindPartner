@@ -2,11 +2,11 @@ import React from 'react';
 
 const SideBar = () => {
     return (
-        <div className='w-screen sm:w-80 bgPink font-cookie font-medium text-md text-white pl-10 pt-32'>
-            <h2 className='cursor-pointer py-1'>Find Your Partner</h2>
-            <h2 className='cursor-pointer py-1'>Donate</h2>
-            <h2 className='cursor-pointer py-1'>Help</h2>
-            <h2 className='cursor-pointer py-1'>LogOut</h2>
+        <div className='w-screen h-full flex flex-col items-start overflow-hidden z-50 absolute sm:relative sm:w-80 bgPink font-cookie font-medium text-md text-white pl-10 pt-32'>
+            <button className='cursor-pointer py-1'>Find Your Partner</button>
+            <button className='cursor-pointer py-1'>Donate</button>
+            <button className='cursor-pointer py-1'>Help</button>
+            <button className='cursor-pointer py-1'>LogOut</button>
         </div>
     );
 }

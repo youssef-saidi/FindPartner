@@ -15,11 +15,12 @@
   },
   "dependencies": {
     "@fingerprintjs/fingerprintjs-pro": "^3.7.1",
-    "@reduxjs/toolkit": "^1.8.5",
+    "@reduxjs/toolkit": "^1.8.6",
     "axios": "^1.1.2",
     "bcrypt": "^5.1.0",
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
+    "emoji-picker-react": "^4.4.3",
     "env-cmd": "^10.1.0",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3",

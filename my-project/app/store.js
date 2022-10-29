@@ -4,14 +4,14 @@ import { createWrapper } from 'next-redux-wrapper'
 import  sideReducer  from './slices/sideSlice'
 import conversationReducer from './slices/conversationSlice'
 
-const combinedReducer = combineReducers({
-  logSliceReducer
-})
+// const combinedReducer = combineReducers({
+  
+// })
 
 export const store = () =>
   configureStore({
     reducer: {
-      isLoggin: combinedReducer,
+      isLoggin: logSliceReducer,
       sideBar: sideReducer,
       conversation: conversationReducer,
     },

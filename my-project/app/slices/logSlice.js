@@ -7,7 +7,7 @@ const initialState = {
 }
 
 export const logSlice = createSlice({
-  name: 'logged',
+  name: 'log',
   initialState,
   reducers: {
     logIn: userlogIn,

@@ -1,4 +1,5 @@
 import _ from 'lodash';
+import Link from 'next/link';
 import { useState } from "react";
 import AjoutImg from '../components/ajoutImg';
 import Button from '../components/button';
@@ -14,29 +15,29 @@ const Register = () => {
 	const handleChange = (e) => {
 		console.log(e)
 		updateFormData({
-		  ...formData,
-		  [e.target.name]: e.target.value.trim()
+			...formData,
+			[e.target.name]: e.target.value.trim()
 		});
 		console.log(formData)
 	};
 
 	const handleSubmit = (_event) => {
-			_event.preventDefault();
-			let errors = {};
-			if (_.isEmpty(formData.name)) errors = { ...errors, name: 'Please fill in your name' };
-			if (_.isEmpty(formData.fakeName)) errors = { ...errors, fakeName: 'Please fill in your fake name' };
-			if (_.isEmpty(formData.email) || !Globals.validateEmail(formData.email)) errors = { ...errors, email: 'Your email is reqiured' };
-			if (_.isEmpty(formData.date)) errors = { ...errors, date: 'Your birthday date is required' };
-			if (_.isEmpty(formData.image)) errors = { ...errors, image: 'Your image is required' };
+		_event.preventDefault();
+		let errors = {};
+		if (_.isEmpty(formData.name)) errors = { ...errors, name: 'Please fill in your name' };
+		if (_.isEmpty(formData.fakeName)) errors = { ...errors, fakeName: 'Please fill in your fake name' };
+		if (_.isEmpty(formData.email) || !Globals.validateEmail(formData.email)) errors = { ...errors, email: 'Your email is reqiured' };
+		if (_.isEmpty(formData.date)) errors = { ...errors, date: 'Your birthday date is required' };
+		if (_.isEmpty(formData.image)) errors = { ...errors, image: 'Your image is required' };
 
-			// if (_.isEmpty(formData.university)) errors = { ...errors, zip_code: 'Company zip code is reqiured' };
-			// if (_.isEmpty(formData.branch)) errors = { ...errors, country: 'Company country is reqiured' };
-			// if (_.isEmpty(formData.sexe)) errors = { ...errors, company_address: 'Company address is reqiured' };
-			
-			updateFormErrors(errors);
-			if (!_.isEmpty(errors)) return;
-			//Make sure all the data is being correct.
-			return Globals.Axios().post(`${Globals.wsurl}user/signup`, {
+		// if (_.isEmpty(formData.university)) errors = { ...errors, zip_code: 'Company zip code is reqiured' };
+		// if (_.isEmpty(formData.branch)) errors = { ...errors, country: 'Company country is reqiured' };
+		// if (_.isEmpty(formData.sexe)) errors = { ...errors, company_address: 'Company address is reqiured' };
+
+		updateFormErrors(errors);
+		if (!_.isEmpty(errors)) return;
+		//Make sure all the data is being correct.
+		return Globals.Axios().post(`${Globals.wsurl}user/signup`, {
 			// 	data: formData,
 			// 	deviceId: Globals.deviceId,
 			// }).then(response => {
@@ -45,13 +46,13 @@ const Register = () => {
 			// 		Globals.Cache.setCookie(Globals.TokenKey, response.data.token);
 			// 		return window.location.reload();
 			// 	}
-				// errors = { ...errors, error: response.data.errors }
-				// return updateFormErrors(errors);
-			}).catch(error => {
-				errors = { ...errors, error: 'Something went wrong please try again later.' }
-				updateFormErrors(errors);
-				console.log(errors);
-			});
+			// errors = { ...errors, error: response.data.errors }
+			// return updateFormErrors(errors);
+		}).catch(error => {
+			errors = { ...errors, error: 'Something went wrong please try again later.' }
+			updateFormErrors(errors);
+			console.log(errors);
+		});
 	}
 	// useEffect(() => {
 	// 	if (loggedin) return navigate('/dashboard');
@@ -131,11 +132,13 @@ const Register = () => {
 					</div>
 				</div>
 				<div className='mt-3'>
-				<Button value="Login" type="submit" bgColor="#DB2777" />
+					<Button value="Register" type="submit" bgColor="#DB2777" />
 				</div>
 				<div className='flex flex-row font-semibold p-2 font-cookie'>
-					<p className='mr-1'>You have an account please</p>			
-					<button className='colorPink underline underline-offset-4'>Log In</button>
+					<p className='mr-1'>You have an account please</p>
+					<Link href={"/login"}>
+						<button className='colorPink underline underline-offset-4'>Log In</button>
+					</Link>
 				</div>
 			</form>
 			<div className='xl:w-1/3 h-full xl:h-screen bgPink text-white p-10 flex flex-col justify-center items-center'>

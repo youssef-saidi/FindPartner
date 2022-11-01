@@ -23,7 +23,7 @@ export default function Home() {
   //   initialState()  
   // },);
 
-  const isLog = useSelector((state) => state.isLoggin.logSliceReducer.value)
+  const isLog = useSelector((state) => state.isLoggin.value)
   // This block is to protect the route and if he still login his account still open
   const router = useRouter()
   const dispatch =useDispatch()

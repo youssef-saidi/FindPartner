@@ -3,10 +3,11 @@ import message from "../../../db/models/message"
 import conversation from "../../../db/models/conversation"
 
 import { decodeToken, verifyToken } from '../../../globals/token';
+import nc from "next-connect";
+import { GLobals } from "../../globals/globalFunction";
+const getConversation = nc(GLobals.onError)
 
-
-export default async function getConversation(req, res) {
-    if (req.method === 'POST') {
+export default   getConversation.post(async(req, res)=> {
 
         const { token } = req.headers
         const { text, receiverId } = req.body
@@ -46,7 +47,4 @@ export default async function getConversation(req, res) {
             }))
         }
 
-
-    }
-
-}
+})

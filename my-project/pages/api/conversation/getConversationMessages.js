@@ -4,49 +4,50 @@ import message from "../../../db/models/message"
 
 import { decodeToken, verifyToken } from '../../../globals/token';
 
+import nc from "next-connect";
+import { GLobals } from "../../globals/globalFunction";
+const getConversationMessages = nc(GLobals.onError)
 
-export default async function getConversationMessages(req, res) {
-    if (req.method === 'POST') {
+export default getConversationMessages.post(async (req, res) => {
 
-        const { token } = req.headers
-        const { receiverId } = req.body
+    const { token } = req.headers
+    const { receiverId } = req.body
 
-        if (!_.isEmpty(verifyToken(token))) {
-            const newtoken = decodeToken(token)
+    if (!_.isEmpty(verifyToken(token))) {
+        const newtoken = decodeToken(token)
 
-            const convr = await conversation.findOne({ where: { senderId: newtoken.id, receiverId: receiverId } })
+        const convr = await conversation.findOne({ where: { senderId: newtoken.id, receiverId: receiverId } })
 
-            if (_.isEmpty(convr)) {
-                res.status(200).json(({
-                    status: false,
-                    errors: "Something went wrong please try again later."
-                }))
-            }
-            const Messages = await message.findAll({ where: { idConv: convr.dataValues.id } })
-
-            if (_.isEmpty(Messages)) {
-                res.status(200).json(({
-                    status: false,
-                    errors: "Something went wrong please try again later."
-                }))
-            }
-
-
+        if (_.isEmpty(convr)) {
             res.status(200).json(({
-                status: true,
-                messages: Messages
+                status: false,
+                errors: "Something went wrong please try again later."
             }))
+        }
+        const Messages = await message.findAll({ where: { idConv: convr.dataValues.id } })
 
-        } else {
-
-            res.status(403).json(({
-                status: true,
-                errors: "Invalid token"
+        if (_.isEmpty(Messages)) {
+            res.status(200).json(({
+                status: false,
+                errors: "Something went wrong please try again later."
             }))
         }
 
 
+        res.status(200).json(({
+            status: true,
+            messages: Messages
+        }))
+
+    } else {
+
+        res.status(403).json(({
+            status: true,
+            errors: "Invalid token"
+        }))
     }
 
 
-}
+
+
+})

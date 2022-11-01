@@ -4,9 +4,11 @@ import message from "../../../db/models/message"
 
 import { decodeToken, verifyToken } from '../../../globals/token';
 
+import nc from "next-connect";
+import { GLobals } from "../../globals/globalFunction";
+const deleteConversation = nc(GLobals.onError)
 
-export default async function deleteConverssation(req, res) {
-    if (req.method === 'DELETE') {
+deleteConversation.delete(async (req, res) => {
 
         const { token } = req.headers
         const { receiverId } = req.body
@@ -22,7 +24,7 @@ export default async function deleteConverssation(req, res) {
                     errors: "Something went wrong please try again later."
                 }))
             }
-            const Messages = await message.update({etat:false},{ where: { idConv: convr.dataValues.id } })
+            const Messages = await message.update({ etat: false }, { where: { idConv: convr.dataValues.id } })
 
             if (_.isEmpty(Messages)) {
                 res.status(200).json(({
@@ -46,6 +48,6 @@ export default async function deleteConverssation(req, res) {
         }
 
 
-    }
 
-}
+})
+export default deleteConversation

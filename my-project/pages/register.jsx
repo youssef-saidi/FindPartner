@@ -1,3 +1,4 @@
+import axios from 'axios';
 import _ from 'lodash';
 import Link from 'next/link';
 import { useState } from "react";
@@ -11,48 +12,46 @@ const Register = () => {
 	// const { loggedin } = useSelector(state => state),
 	const [formData, updateFormData] = useState({}),
 		[formErrors, updateFormErrors] = useState({});
+	const [selectedFile, setSelectedFile] = useState(null);
+
 	// navigate = useNavigate();
 	const handleChange = (e) => {
-		console.log(e)
 		updateFormData({
 			...formData,
 			[e.target.name]: e.target.value.trim()
 		});
-		console.log(formData)
 	};
+	const handleFileSelected = (e) => {
+		setSelectedFile(e.target.files[0])
+	}
 
-	const handleSubmit = (_event) => {
+	const handleSubmit =(_event) => {
 		_event.preventDefault();
 		let errors = {};
-		if (_.isEmpty(formData.name)) errors = { ...errors, name: 'Please fill in your name' };
+		if (_.isEmpty(formData.fullname)) errors = { ...errors, name: 'Please fill in your name' };
 		if (_.isEmpty(formData.fakeName)) errors = { ...errors, fakeName: 'Please fill in your fake name' };
-		if (_.isEmpty(formData.email) || !Globals.validateEmail(formData.email)) errors = { ...errors, email: 'Your email is reqiured' };
+		if (_.isEmpty(formData.email) || !GLobals.validateEmail(formData.email)) errors = { ...errors, email: 'Your email is reqiured' };
 		if (_.isEmpty(formData.date)) errors = { ...errors, date: 'Your birthday date is required' };
-		if (_.isEmpty(formData.image)) errors = { ...errors, image: 'Your image is required' };
+		// if (_.isEmpty(formData.image)) errors = { ...errors, image: 'Your image is required' };
 
 		// if (_.isEmpty(formData.university)) errors = { ...errors, zip_code: 'Company zip code is reqiured' };
 		// if (_.isEmpty(formData.branch)) errors = { ...errors, country: 'Company country is reqiured' };
 		// if (_.isEmpty(formData.sexe)) errors = { ...errors, company_address: 'Company address is reqiured' };
-
 		updateFormErrors(errors);
 		if (!_.isEmpty(errors)) return;
-		//Make sure all the data is being correct.
-		return Globals.Axios().post(`${Globals.wsurl}user/signup`, {
-			// 	data: formData,
-			// 	deviceId: Globals.deviceId,
-			// }).then(response => {
-			// 	if (response.data.status && response.data.token) {
-			// 		Globals.Cache.set(Globals.TokenKey, response.data.token);
-			// 		Globals.Cache.setCookie(Globals.TokenKey, response.data.token);
-			// 		return window.location.reload();
-			// 	}
-			// errors = { ...errors, error: response.data.errors }
-			// return updateFormErrors(errors);
-		}).catch(error => {
-			errors = { ...errors, error: 'Something went wrong please try again later.' }
-			updateFormErrors(errors);
-			console.log(errors);
+		updateFormData({
+			...formData,
+			["password"]: "123456"
 		});
+
+		const files = new FormData()
+		files.append("file", selectedFile)
+		files.append("data", JSON.stringify(formData))
+
+		axios.post("http://localhost:3000/api/register",files).then(res=>{
+			console.log(res)
+		}).catch(err=>console.log(err))
+	
 	}
 	// useEffect(() => {
 	// 	if (loggedin) return navigate('/dashboard');
@@ -60,7 +59,7 @@ const Register = () => {
 	const fullName = {
 		label: "Full Name",
 		type: "text",
-		name: 'name'
+		name: 'fullname'
 	}
 	const fakeName = {
 		label: "Fake Name",
@@ -98,7 +97,7 @@ const Register = () => {
 	}
 	return (
 		<section className='h-full xl:h-screen flex flex-col-reverse xl:flex-row bgPink relative'>
-			<form onSubmit={handleSubmit} className='xl:w-2/3 h-full xl:h-screen rounded-br-4xl bg-white flex flex-col items-center justify-center'>
+			<form onSubmit={handleSubmit} encType="multipart/form-data" className='xl:w-2/3 h-full xl:h-screen rounded-br-4xl bg-white flex flex-col items-center justify-center'>
 				<div className='flex flex-col xl:flex-row mt-8'>
 					<div className='px-6'>
 						<Input handleChange={handleChange} formErrors={formErrors} inputInfo={fullName} />
@@ -125,7 +124,7 @@ const Register = () => {
 				</div>
 				<div className='flex flex-col xl:flex-row mt-4'>
 					<div className='px-6'>
-						<AjoutImg inputInfo={image} handleChange={handleChange} formErrors={formErrors} />
+						<AjoutImg inputInfo={image} handleFileSelected={handleFileSelected} formErrors={formErrors} />
 					</div>
 					<div className='px-6 mt-4 xl:mt-0'>
 						<Select info={sexe} />

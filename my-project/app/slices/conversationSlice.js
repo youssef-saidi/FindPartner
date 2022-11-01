@@ -12,7 +12,7 @@ const initialState = {
     {
       IdUser: 1,
       userName: "Ayechi Nour",
-      imgUser: "/image/nour.jpg",
+      imgUser: "/image/noImage.jpg",
       etat:true
     },
     {

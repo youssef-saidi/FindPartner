@@ -38,6 +38,7 @@ const Login = () => {
       data: formData,
     }).then(response => {
       console.log(response)
+     
       // if (response.data.status && response.data.token) {
       //   Globals.Cache.set(Globals.TokenKey, response.data.token);
       //   Globals.Cache.setCookie(Globals.TokenKey, response.data.token);

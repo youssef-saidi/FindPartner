@@ -36,6 +36,7 @@ function createToken(user) {
       id: user.id,
       fullname: user.fullname,
       email: user.email,
+      image:user.image,
       // deviceId: user.deviceId,
       // scope: [scopes]
     },
@@ -83,6 +84,7 @@ function createShortToken(user) {
     id: user.id,
     fullname: user.fullname,
     email: user.email,
+    image:user.image,
     // deviceId: user.deviceId,
     // scope: [scopes]
   },

@@ -44,6 +44,12 @@ export const GLobals = {
         }
       });
     }
+  },
+  onError: (err, req, res, next)=> {
+    console.error(err);
+    console.log("hi")
+    res.status(500).end({error:err.toString()});
+    next()
   }
 
 

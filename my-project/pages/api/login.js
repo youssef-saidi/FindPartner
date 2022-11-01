@@ -1,51 +1,59 @@
+import usermeta from "../../db/models/usermeta";
 import users from "../../db/models/users"
 import { createToken } from "../../globals/token";
 const Bcrypt = require('bcrypt');
+import nc from "next-connect";
+import { GLobals } from "../../globals/globalFunction";
 
+const login = nc(GLobals.onError)
 
-export default async function login(req, res) {
-  if (req.method === 'POST') {
+login.post(async (req, res) => {
   //  const deviceId = req.headers.deviceid
-    const { email, password } = req.body.data;
+  console.log(req.body)
+  const { email, password } = req.body.data;
 
-console.log("ok")
-    const user = await users.findOne({
+  const user = await users.findOne({
+    where: {
+      email: email
+    }
+  });
+  if (user) {
+    const compare = await Bcrypt.compare(password, user.password);
+
+    if (!compare) return res.status(200).json({
+      status: false,
+      errors: 'invalid email or password1'
+    });
+
+    const userImage = await usermeta.findOne({
       where: {
-        email: email
+        userId: user.id,
+        metaKey: "image"
       }
     });
-    if (user) {
-      const compare = await Bcrypt.compare(password, user.password);
-
-      if (!compare) return res.status(200).json({
-        status: false,
-        errors: 'invalid email or password1'
-      });
-      let _user = {};
-      _user.id = user.id;
-      _user.user_email = user.email;
-      // _user.deviceId = deviceId;
+    let _user = {};
+    _user.id = user.id;
+    _user.user_email = user.email;
+    _user.fullname = user.fullname;
+    _user.image = userImage.dataValues.metaValue;
+    // _user.deviceId = deviceId;
 
 
-      const Newtoken = createToken(_user);
+    const Newtoken = createToken(_user);
 
 
-      res.status(200).json({ status: true, token: Newtoken })
-    } else {
-
-
-      res.status(200).json({
-        status: false,
-        errors: 'invalid email or password2'
-      })
-     }
-
+    res.status(200).json({ status: true, token: Newtoken })
   } else {
-    res.status(400).json({
-      status: false, errors: 'Something went wrong please try again later.'
-    })
 
+
+    res.status(200).json({
+      status: false,
+      errors: 'invalid email or password2'
+    })
   }
 
 
-}
+
+
+});
+export default login;
